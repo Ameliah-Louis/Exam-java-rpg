@@ -4,17 +4,18 @@ package personnages;
 public abstract class Personnage {
     protected String nom;
     protected int pv;
+    protected int pvMax;
     protected int attaque;
     protected int defense;
 
     // Constructeur
-    public Personnage(String nom, int pv, int attaque, int defense) {
+    public Personnage(String nom, int pvInitial, int attaque, int defense) {
         this.nom = nom;
-        this.pv = pv;
+        this.pvMax = pvInitial;  // pvMax fixé à la vie de départ
+        this.pv = pvInitial;     // pv courant = pv max au départ
         this.attaque = attaque;
         this.defense = defense;
     }
-
     // getters & setters
     public String getNom() {
         return nom;

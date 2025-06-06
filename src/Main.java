@@ -1,3 +1,6 @@
+import personnages.Guerrier;
+import personnages.Gobelin;
+
 // - Affiche écran d'accueil
 // - Lit le nom du joueur
 // - Propose choix de classe (Paladin, Guerrier, Mage)
@@ -15,5 +18,14 @@ public class Main {
         //      si victoire: compteurEnnemis++; si boss: compteurBoss++
         // 5. Afficher Game Over et score
         // 6. Sauvegarder score dans scores.txt
-    }
+            Guerrier heros = new Guerrier("Thorgal");
+            Gobelin gob = new Gobelin();
+
+            System.out.println("Combat entre " + heros.getNom() + " et " + gob.getNom());
+
+            gob.attaquer(heros);
+            heros.attaquer(gob);
+        }
+
+
 }

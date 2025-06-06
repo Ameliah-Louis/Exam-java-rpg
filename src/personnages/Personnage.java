@@ -5,6 +5,8 @@ public abstract class Personnage {
     protected String nom;
     protected int pv;
     protected int pvMax;
+    protected int Mana;
+    protected int ManaMax;
     protected int attaque;
     protected int defense;
 
@@ -31,6 +33,16 @@ public abstract class Personnage {
 
     public void setPv(int pv) {
         this.pv = pv;
+    }
+
+    public int getMana() {
+        // Conseillé par GPT pour gérer les classes sans Mana. On a un défaut à moins 1 qui n'affichera pas le mana mais
+        // on l'override dans les classes qui possèdent du mana avec un return Mana
+        return -1;
+    }
+
+    public void setMana(int mana) {
+        Mana = mana;
     }
 
     public int getAttaque() {
@@ -65,6 +77,9 @@ public abstract class Personnage {
         // Afficher un message au joueur
         System.out.println(this.nom + " attaque " + cible.getNom() + " et inflige " + degats + " points de dégâts !");
     }
+
+// Méthode abstraite du pouvoir qui sera implémentée dans chaque classe avec sa logique propre
+public abstract void utiliserPouvoir(Personnage cible);
 
 public void prendreDegats(int degats) {
     // On soustrait les dégâts reçus aux points de vie actuels

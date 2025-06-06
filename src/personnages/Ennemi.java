@@ -4,12 +4,25 @@ import java.util.Random;
 
 // Ennemi hérite de Personnage, donc possède nom, pv, attaque, défense, etc.
 public abstract class Ennemi extends Personnage {
-
+    private boolean estBoss;
     protected Random random = new Random(); // pour choisir une attaque aléatoirement
 
-    // Constructeur de base pour un Ennemi, on passe ses stats au parent
-    public Ennemi(String nom, int pvInitial, int attaque, int defense) {
+
+    /**
+     * Constructeur de base pour un Ennemi, on passe ses stats au parent
+     * @param nom
+     * @param pvInitial
+     * @param attaque
+     * @param defense
+     * @param estBoss
+     */
+    public Ennemi(String nom, int pvInitial, int attaque, int defense, boolean estBoss) {
         super(nom, pvInitial, attaque, defense);
+        this.estBoss = estBoss;
+    }
+
+    public boolean estBoss() {
+        return estBoss;
     }
 
     // Méthode abstraite : chaque ennemi doit définir ses 2 attaques spécifiques

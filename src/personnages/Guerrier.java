@@ -101,11 +101,11 @@ public class Guerrier extends Personnage implements PouvoirSpecial {
             degats *= 1.5; //  dégats +50%
         }
 
-        // Appliquer les dégâts à la cible
-        cible.prendreDegats(degats);
-
         // Message d’info dans la console
         System.out.println(getNom() + (enRage ? " en Rage " : " ") + "attaque " + cible.getNom() + " et inflige " + degats + " dégâts.");
+
+        // Appliquer les dégâts à la cible
+        cible.prendreDegats(degats);
     }
 
     // Méthode prendreDegats() : subit + de dégâts si en Rage

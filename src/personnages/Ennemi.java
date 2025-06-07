@@ -40,4 +40,6 @@ public abstract class Ennemi extends Personnage {
             attaque2(cible);
         }
     }
+
+    public abstract void miseAJourTour();
 }

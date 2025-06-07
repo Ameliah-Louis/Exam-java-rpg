@@ -3,6 +3,7 @@ import personnages.Gobelin;
 import personnages.Personnage;
 import utils.CombatManager;
 import utils.GestionnairePersonnage;
+import utils.ScoreManager;
 import utils.UsineEnnemi;
 
 import java.util.Scanner;
@@ -55,9 +56,11 @@ public class Main {
         // 5. Afficher Game Over et sauvegarder le score
         System.out.println("Game Over ! " + heros.getNom() + " a vaincu " + compteurEnnemis + " ennemis dont " + compteurBoss + " boss.");
         // Ajputer méthode pour sauvegarder le score dans un fichier
-//        ScoreManager.sauvegarderScore(heros, compteurEnnemis, compteurBoss);
+        ScoreManager.sauvegarderScore(heros, compteurEnnemis, compteurBoss);
 
         scanner.close();
+        ScoreManager.afficherScores();
+
     }
 
 

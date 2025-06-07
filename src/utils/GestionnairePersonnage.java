@@ -1,6 +1,8 @@
 package utils;
 
 import personnages.Guerrier;
+import personnages.Mage;
+import personnages.Paladin;
 import personnages.Personnage;
 
 import java.util.Scanner;
@@ -25,9 +27,9 @@ public class GestionnairePersonnage {
                 case "1":
                     return new Guerrier(nom);
                 case "2":
-                    return new Guerrier(nom); // a remplacer par le Mage
+                    return new Mage(nom); // a remplacer par le Mage
                 case "3":
-                    return new Guerrier(nom);// a remplacer par le Paladin
+                    return new Paladin(nom);// a remplacer par le Paladin
                 default:
                     System.out.println("Choix invalide, veuillez réessayer.");
             }

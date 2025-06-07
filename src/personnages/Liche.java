@@ -24,6 +24,11 @@ public class Liche extends Ennemi {
         }
     }
 
+    @Override
+    public void miseAJourTour() {
+
+    }
+
     // Définir l'attaque 1 comme une attaque Nécrotique
     @Override
     public void attaque1(Personnage cible) {

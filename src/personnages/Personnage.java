@@ -1,5 +1,7 @@
 package personnages;
 
+import interfaces.Potion;
+
 // Classe abstraite de base pour tous les personnages
 public abstract class Personnage {
     protected String nom;
@@ -81,7 +83,15 @@ public abstract class Personnage {
 // Méthode abstraite du pouvoir qui sera implémentée dans chaque classe avec sa logique propre
 public abstract void utiliserPouvoir(Personnage cible);
 
-public void prendreDegats(int degats) {
+
+// Calcule les dégâts nets infligés à une cible en fonction de sa défense
+    public int calculerDegats(int attaque, int defenseCible) {
+        int degats = attaque - defenseCible;
+        return Math.max(1, degats); // Toujours infliger au moins 1 point de dégât
+    }
+
+
+    public void prendreDegats(int degats) {
     // On soustrait les dégâts reçus aux points de vie actuels
     this.pv -= degats;
 
@@ -99,6 +109,53 @@ public void prendreDegats(int degats) {
 // Si les points de vie sont supérieurs à 0, alors il est vivant
         return this.pv > 0;
     }
+
+    public class PotionMana implements Potion {
+
+        private int manaAmount;
+
+        public PotionMana(int manaAmount) {
+            this.manaAmount = manaAmount;
+        }
+
+        @Override
+        public void utiliser(Personnage cible) {
+            // Si le personnage a un mana, on le restaure
+            if (cible instanceof Paladin || cible instanceof Mage) {
+                int manaAvant = 0;
+                int manaApres = 0;
+
+                if (cible instanceof Paladin) {
+                    Paladin p = (Paladin) cible;
+                    manaAvant = p.getMana();
+                    p.restaurerMana(manaAmount);
+                    manaApres = p.getMana();
+                } else if (cible instanceof Mage) {
+                    Mage m = (Mage) cible;
+                    manaAvant = m.getMana();
+                    m.restaurerMana(manaAmount);
+                    manaApres = m.getMana();
+                }
+                System.out.println(cible.getNom() + " utilise une potion de mana et récupère " + (manaApres - manaAvant) + " mana.");
+            } else {
+                System.out.println(cible.getNom() + " ne peut pas utiliser cette potion de mana !");
+            }
+        }
+
+        @Override
+        public String getNom() {
+            return "Potion de Mana";
+        }
+    }
+
+    public void soigner(int montant) {
+        this.pv += montant;
+        if (this.pv > this.pvMax) {
+            this.pv = this.pvMax;
+        }
+    }
+
+
 
     // (Optionnel) afficher fiche de stats
     public void afficherStats() {

@@ -2,8 +2,7 @@ package utils;
 
 import java.util.Scanner;
 
-import personnages.Ennemi;
-import personnages.Personnage;
+import personnages.*;
 
 public class CombatManager {
     private static Scanner scanner = new Scanner(System.in);
@@ -22,6 +21,20 @@ public class CombatManager {
 
         // 1. Situation initiales
         afficherStats(heros, ennemi);
+        // Recharge des potions au début du combat
+        if (heros instanceof Guerrier) {
+            ((Guerrier) heros).rechargerPotions();
+        } else if (heros instanceof Mage) {
+            ((Mage) heros).rechargerPotions();
+        } else if (heros instanceof Paladin) {
+            ((Paladin) heros).rechargerPotions();
+        }
+        // Mise à jour des effets spéciaux du héros à chaque tour (bouclier, cooldown, mana)
+        if (heros instanceof Mage) {
+            ((Mage) heros).updatePouvoirs();
+        } else if (heros instanceof Paladin) {
+            ((Paladin) heros).updatePouvoirs(); // À faire aussi pour lui si pouvoir bouclier à voir
+        }
 
         // Boucle tant que les deux sont vivants
         while (heros.estVivant() && ennemi.estVivant()) {
@@ -88,7 +101,6 @@ public class CombatManager {
         } else {
             System.out.println(heros.getNom() + " - PV: " + heros.getPv());
         }
-        System.out.println(heros.getNom() + " - PV: " + heros.getPv() + " Mana: " + heros.getMana());
         System.out.println(ennemi.getNom() + " - PV: " + ennemi.getPv());
         // TODO: Afficher potions, cooldowns, etc.
         System.out.println("-------------------------");
@@ -109,10 +121,68 @@ public class CombatManager {
         }
     }
 
-    // Gère l'utilisation d'une potion selon les disponibilités du héros
     private static void gererUtilisationPotion(Personnage heros) {
-        // TODO: demander type potion (soin ou mana selon classe)
-        // TODO: vérifier si potion dispo, appliquer effet et décrémenter stock
-        System.out.println("Fonction de gestion de potions à implémenter.");
+        System.out.println("Quel type de potion souhaitez-vous utiliser ?");
+        System.out.println("1 - Potion de soin");
+        System.out.println("2 - Potion de mana");
+
+        int choixPotion;
+        try {
+            choixPotion = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Choix invalide.");
+            return;
+        }
+
+        switch (choixPotion) {
+            case 1: // Potion de soin
+                if (heros instanceof Guerrier) {
+                    Guerrier g = (Guerrier) heros;
+                    if (g.getPotionsSoin() > 0) {
+                        g.utiliserPotionSoin();
+                    } else {
+                        System.out.println("Vous n'avez plus de potion de soin !");
+                    }
+                } else if (heros instanceof Mage) {
+                    Mage m = (Mage) heros;
+                    if (m.getPotionsSoin() > 0) {
+                        m.utiliserPotionSoin();
+                    } else {
+                        System.out.println("Vous n'avez plus de potion de soin !");
+                    }
+                } else if (heros instanceof Paladin) {
+                    Paladin p = (Paladin) heros;
+                    if (p.getPotionsSoin() > 0) {
+                        p.utiliserPotionSoin();
+                    } else {
+                        System.out.println("Vous n'avez plus de potion de soin !");
+                    }
+                }
+                break;
+
+            case 2: // Potion de mana
+                if (heros instanceof Mage) {
+                    Mage m = (Mage) heros;
+                    if (m.getPotionsMana() > 0) {
+                        m.utiliserPotionMana();
+                    } else {
+                        System.out.println("Vous n'avez plus de potion de mana !");
+                    }
+                } else if (heros instanceof Paladin) {
+                    Paladin p = (Paladin) heros;
+                    if (p.getPotionsMana() > 0) {
+                        p.utiliserPotionMana();
+                    } else {
+                        System.out.println("Vous n'avez plus de potion de mana !");
+                    }
+                } else {
+                    System.out.println("Cette classe ne peut pas utiliser de mana.");
+                }
+                break;
+
+            default:
+                System.out.println("Choix de potion invalide.");
+        }
     }
+
 }

@@ -143,22 +143,22 @@ public class Guerrier extends Personnage implements PouvoirSpecial {
         }
     }
 
+    // Potion de soin : restaure 30% PV max
     public void utiliserPotionSoin() {
         if (potionsSoin > 0) {
-            int soins = (int)(pvMax * 0.3); // 30% de PV max restauré
-            pv += soins;
-
-            // Ne pas dépasser les PV max
-            if (pv > pvMax) {
-                pv = pvMax;
-            }
-
+            int soinsPV = (int)(pvMax * 0.3);
+            pv += soinsPV;
+            if (pv > pvMax) pv = pvMax;
             potionsSoin--;
-            System.out.println(getNom() + " utilise une potion de soin et récupère " + soins + " PV. PV actuels: " + pv);
+            System.out.println(getNom() + " utilise une potion de soin et récupère " + soinsPV + " PV. PV actuels : " + pv);
         } else {
-            System.out.println(getNom() + " n'a plus de potion de soin !");
+            System.out.println(getNom() + " n'a plus de potions de soin !");
         }
     }
+    public void rechargerPotions() {
+        this.potionsSoin = 1; // Ou la quantité que tu souhaites
+    }
+
 
 
 }

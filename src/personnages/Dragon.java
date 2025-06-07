@@ -39,6 +39,11 @@ public class Dragon extends Ennemi {
     }
 
     @Override
+    public void miseAJourTour() {
+
+    }
+
+    @Override
     public void utiliserPouvoir(Personnage cible) {
         // Le dragon active sa défense renforcée pour réduire les dégâts subis
         System.out.println(nom + " frémit et renforce ses écailles !");

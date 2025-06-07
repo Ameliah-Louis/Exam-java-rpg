@@ -26,6 +26,11 @@ public class Gobelin extends Ennemi {
     }
 
     @Override
+    public void miseAJourTour() {
+
+    }
+
+    @Override
     public void utiliserPouvoir(Personnage cible) {
 
     }

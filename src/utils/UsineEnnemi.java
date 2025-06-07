@@ -24,9 +24,9 @@ public class UsineEnnemi {
             case 0:
                 return new Gobelin(); //Ennemi(String nom, int pvInitial, int attaque, int defense, boolean estBoss)
             case 1:
-                return new Gobelin(); //TODO Troll();
+                return new Troll(); //TODO Troll();
             case 2:
-                return new Gobelin(); //TODO Dragon();
+                return new Dragon(); //TODO Dragon();
             default:
                 return new Gobelin(); // Choix par défaut
         }
@@ -40,9 +40,9 @@ public class UsineEnnemi {
             case "Paladin":
                 return new Liche();
             case "Guerrier":
-                return new Liche(); //TODO Tarasque();
+                return new Tarasque(); //TODO Tarasque();
             case "Mage":
-                return new Liche(); //TODO Elementaire();
+                return new Elementaire(); //TODO Elementaire();
             default:
                 return new Dragon(); // Par défaut si classe inconnue
         }
